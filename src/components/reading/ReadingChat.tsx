@@ -78,28 +78,10 @@ const ReadingChat: React.FC<ReadingChatProps> = ({ sessionId, userId, userName, 
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
-  // Scroll to bottom when messages change
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-  
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-  
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!message.trim()) return;
-    
-    onSendMessage(message);
-    setMessage('');
-  };
-  
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
-  
+
   return (
     <div className="flex flex-col h-full">
       {/* Chat header */}
@@ -172,15 +154,15 @@ const ReadingChat: React.FC<ReadingChatProps> = ({ sessionId, userId, userName, 
       <div className="border-t border-gray-800 p-3">
         <form onSubmit={handleSendMessage} className="flex items-center space-x-2">
           <Input
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             placeholder="Type a message..."
             className="flex-1 bg-black/30 border border-primary/30"
           />
           <Button 
             type="submit" 
             size="icon" 
-            disabled={!message.trim()}
+            disabled={!input.trim()}
             className="bg-accent hover:bg-accent/80"
           >
             <SendIcon className="h-4 w-4" />
