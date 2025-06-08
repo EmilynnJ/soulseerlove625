@@ -111,6 +111,10 @@ export async function topUpWallet(amount: number, paymentIntentId: string): Prom
   if (!res.ok) throw new Error('Failed to top up wallet');
 }
 
+export async function addFunds(amount: number, paymentIntentId: string): Promise<void> {
+  return topUpWallet(amount, paymentIntentId);
+}
+
 // --- Reviews ---
 export interface Review {
   readerId: string;

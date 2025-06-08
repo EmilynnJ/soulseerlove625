@@ -97,6 +97,25 @@ export async function getReaderReviews() {
   ];
 }
 
+export interface ReviewInput {
+  readerId: string;
+  sessionId?: string; // Optional: link review to a specific session
+  rating: number;
+  text: string;
+}
+
+export async function submitReview(reviewData: ReviewInput) {
+  const res = await fetch(`${API_BASE}/reviews`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(reviewData),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Failed to submit review');
+  return data; // Assuming the backend returns the created review or a success message
+}
+
 export async function getEarnings() {
   // Mock data for development
   return 150.0;
