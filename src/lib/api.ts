@@ -58,13 +58,6 @@ export async function endSession(sessionId: string) {
 }
 
 export async function getUserSessions() {
-  // For dev: return mock data if no backend
-  if (!API_BASE || API_BASE.includes('mock')) {
-    return [
-      { id: '1', readerName: 'Mystic Luna', startedAt: '2025-06-05T19:00:00Z', endedAt: '2025-06-05T19:30:00Z', status: 'completed', cost: 45 },
-      { id: '2', readerName: 'Crystal Sage', startedAt: '2025-06-01T20:00:00Z', endedAt: '2025-06-01T20:15:00Z', status: 'completed', cost: 22.5 },
-    ];
-  }
   const res = await fetch(`${API_BASE}/sessions/user/me`, {
     credentials: 'include',
   });
@@ -74,27 +67,39 @@ export async function getUserSessions() {
 }
 
 export async function getUserReviews() {
-  // Mock data for development
-  return [
-    { id: 'r1', readerName: 'Mystic Luna', rating: 5, text: 'Amazing reading!', createdAt: '2025-06-05T19:35:00Z' },
-    { id: 'r2', readerName: 'Crystal Sage', rating: 4, text: 'Very insightful.', createdAt: '2025-06-01T20:20:00Z' },
-  ];
+  const res = await fetch(`${API_BASE}/reviews/user/me`, {
+    credentials: 'include',
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Failed to fetch user reviews');
+  return data;
 }
 
 export async function getReaderSessions() {
-  // Mock data for development
-  return [
-    { id: 's1', clientName: 'Emily', startedAt: '2025-06-06T21:00:00Z', endedAt: '2025-06-06T21:30:00Z', status: 'completed', earnings: 60 },
-    { id: 's2', clientName: 'Alex', startedAt: '2025-06-02T18:00:00Z', endedAt: '2025-06-02T18:45:00Z', status: 'completed', earnings: 90 },
-  ];
+  const res = await fetch(`${API_BASE}/sessions/reader/me`, {
+    credentials: 'include',
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Failed to fetch reader sessions');
+  return data;
 }
 
 export async function getReaderReviews() {
-  // Mock data for development
-  return [
-    { id: 'rr1', clientName: 'Emily', rating: 5, text: 'A wonderful experience!', createdAt: '2025-06-06T21:35:00Z' },
-    { id: 'rr2', clientName: 'Alex', rating: 4, text: 'Great insights.', createdAt: '2025-06-02T18:50:00Z' },
-  ];
+  const res = await fetch(`${API_BASE}/reviews/reader/me`, {
+    credentials: 'include',
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Failed to fetch reader reviews');
+  return data;
+}
+
+export async function getEarnings() {
+  const res = await fetch(`${API_BASE}/earnings/me`, {
+    credentials: 'include',
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Failed to fetch earnings');
+  return data;
 }
 
 export interface ReviewInput {
