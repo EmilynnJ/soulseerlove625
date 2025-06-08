@@ -10,8 +10,16 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   build: {
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true
+    },
     rollupOptions: {
-      external: ['socket.io-client']
+      output: {
+        manualChunks: {
+          'socket.io-client': ['socket.io-client']
+        }
+      }
     }
   },
   plugins: [
