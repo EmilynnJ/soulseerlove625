@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { addFunds, getWallet } from '@/lib/backend';
+import { topUpWallet, getWallet } from '@/lib/backend';
 import { CreditCard, DollarSign, CheckCircle, AlertCircle, ArrowRight, History } from 'lucide-react';
 
 const mockTransactionHistory = [
