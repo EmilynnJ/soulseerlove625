@@ -2,13 +2,6 @@
 // Replace all mock API calls with these real endpoints
 // Ensure to set VITE_API_BASE in your .env file
 
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://kamsdtxsunnlwofviwyk.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthbXNkdHhzdW5ubHdvZnZpd3lrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg3MTI3MDUsImV4cCI6MjA2NDI4ODcwNX0.AIIB3q18WSZ4auvMDpSHwlnTARfYaF-7S8rZRpWKr_M';
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
 
 // --- Types ---
