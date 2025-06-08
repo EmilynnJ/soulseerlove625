@@ -9,9 +9,11 @@ import { Label } from '@/components/ui/label';
 import { addFunds, getWallet } from '@/lib/backend';
 import { CreditCard, DollarSign, CheckCircle, AlertCircle, ArrowRight, History } from 'lucide-react';
 
-    id: 'tx1', 
-    type: 'deposit', 
-    amount: 50.00, 
+const mockTransactionHistory = [
+  { 
+    id: 'tx1',
+    type: 'deposit',
+    amount: 50.00,
     date: '2025-06-05T14:30:45Z', 
     description: 'Added funds via Stripe' 
   },
@@ -67,7 +69,7 @@ const Wallet: React.FC = () => {
     
     const fetchBalance = async (): Promise<void> => {
       try {
-        const balanceData = await getBalance();
+        const balanceData = await getWallet();
         setBalance(balanceData);
       } catch (err: Error) {
         setError('Failed to fetch balance');
